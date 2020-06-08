@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+	</head>
+	
+	<!-- Styles -->
+	<style>
+		#chartdiv {
+		  width: 100%;
+		height:550px;
+		max-width:100%;
+		}
+	</style>
+	
+	<body>
+		
+		<!-- HTML -->
+		<div id="chartdiv"></div>
+		
+	</body>
+	
+	
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+	<script src="https://www.amcharts.com/lib/4/lang/de_DE.js"></script>
+	<script src="https://www.amcharts.com/lib/4/geodata/germanyLow.js"></script>
+	<script src="https://www.amcharts.com/lib/4/fonts/notosans-sc.js"></script>
+	
+	<!-- Resources -->
+	<script src="https://www.amcharts.com/lib/4/plugins/forceDirected.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	
+	<script
+	  src="https://code.jquery.com/jquery-3.5.1.js"
+	  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	  crossorigin="anonymous"></script>
+	
+	<script>
+		
+		loadChartAmigosDosAmigos();
+		function loadChartAmigosDosAmigos() {
+		
+			let func = {
+				loadChart: function(args) {
+					
+					let childrenChart = [];
+					for (var i = 0; i < args.amigos.length; i++) {
+						
+						let amigoDoAmigoChildren = [];
+						let amigoDoAmigo = args.amigos[i].amigos;
+						for (var z = 0; z < amigoDoAmigo.length; z++) {
+							let amigoDoAmigoObj = {
+								name: amigoDoAmigo[z].nome,
+								value: 100
+							};
+							amigoDoAmigoChildren.push(amigoDoAmigoObj);
+						}
+						 
+						
+						let children = {
+							name: args.amigos[i].usuario.nome,
+							children: amigoDoAmigoChildren
+						}
+						
+						childrenChart.push(children);
+					}
+					
+					let nomePrincipal = args.usuario.nome;
+					console.log(args.usuario.nome);
+					
+					
+					am4core.ready(function() {
+
+					// Themes begin
+					am4core.useTheme(am4themes_animated);
+					// Themes end
+
+
+
+					var chart = am4core.create("chartdiv", am4plugins_forceDirected.ForceDirectedTree);
+					var networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries())
+
+					chart.data = [
+								  {
+									name: nomePrincipal,
+									children: childrenChart
+								  }
+								];
+
+					networkSeries.dataFields.value = "value";
+					networkSeries.dataFields.name = "name";
+					networkSeries.dataFields.children = "children";
+					networkSeries.nodes.template.tooltipText = "{name}:{value}";
+					networkSeries.nodes.template.fillOpacity = 1;
+
+					networkSeries.nodes.template.label.text = "{name}"
+					networkSeries.fontSize = 10;
+
+					networkSeries.links.template.strokeWidth = 1;
+
+					var hoverState = networkSeries.links.template.states.create("hover");
+					hoverState.properties.strokeWidth = 3;
+					hoverState.properties.strokeOpacity = 1;
+
+					networkSeries.nodes.template.events.on("over", function(event) {
+					  event.target.dataItem.childLinks.each(function(link) {
+						link.isHover = true;
+					  })
+					  if (event.target.dataItem.parentLink) {
+						event.target.dataItem.parentLink.isHover = true;
+					  }
+
+					})
+
+					networkSeries.nodes.template.events.on("out", function(event) {
+					  event.target.dataItem.childLinks.each(function(link) {
+						link.isHover = false;
+					  })
+					  if (event.target.dataItem.parentLink) {
+						event.target.dataItem.parentLink.isHover = false;
+					  }
+					})
+
+					}); // end am4core.ready()
+								
+							}
+						};
+					
+						$.ajax({
+							type: 'POST',
+							dataType: 'json',
+							contentType:"application/json;",
+							url: 'http://localhost:8080/rede-social/usuario/buscar/amigos/amigo',
+							data: JSON.stringify({
+									"nome": "Priscila"
+								  }),
+							beforeSend: function() {
+								
+							},
+							success: function(result, status, request) {
+								console.log(result);
+								func.loadChart(result);
+							},
+						error: function(request, status, erro) {
+							console.log('Ocorreu o seguinte erro -> ' + request.responseText);
+						},
+						complete: function() {
+							
+						}
+					});
+			
+			
+		}
+	
+		
+	</script>
+</html>

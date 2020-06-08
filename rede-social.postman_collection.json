@@ -1,0 +1,158 @@
+{
+	"id": "9b1a84d7-ac6a-b228-6819-40cd0f599313",
+	"name": "rede-social",
+	"description": "",
+	"order": [
+		"d61470ee-7ddf-78c6-f91d-f3e00e58a38e",
+		"a2b0b081-d937-a663-eb7d-d6f2ad9c0547",
+		"e945e00d-e1cf-e01a-1dcb-668d9c938782",
+		"e3d06dcf-87b9-3252-8d90-990806256781",
+		"c73b2f96-f10b-43e9-dce3-43759aa3476d"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1591579390698,
+	"owner": "11655257",
+	"public": false,
+	"requests": [
+		{
+			"id": "a2b0b081-d937-a663-eb7d-d6f2ad9c0547",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8080/rede-social/usuario/vincular/amigo",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1591624584595,
+			"name": "VincularAmigo",
+			"description": "",
+			"collectionId": "9b1a84d7-ac6a-b228-6819-40cd0f599313",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\" : \"Valentina\",\n\t\"nomeAmigo\" : \"Emanuel\"\n}"
+		},
+		{
+			"id": "c73b2f96-f10b-43e9-dce3-43759aa3476d",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/rede-social/usuarios",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "9b1a84d7-ac6a-b228-6819-40cd0f599313",
+			"data": null,
+			"dataMode": "params",
+			"name": "BuscarUsuarios",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1591617199506,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "d61470ee-7ddf-78c6-f91d-f3e00e58a38e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8080/rede-social/usuario/salvar",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1591583323881,
+			"name": "SalvarUsuario",
+			"description": "",
+			"collectionId": "9b1a84d7-ac6a-b228-6819-40cd0f599313",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\": \"Emanuel\"\n}"
+		},
+		{
+			"id": "e3d06dcf-87b9-3252-8d90-990806256781",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8080/rede-social/usuario/buscar/amigos/amigo",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1591615588560,
+			"name": "BuscarAmigosDosAmigosPorNome",
+			"description": "",
+			"collectionId": "9b1a84d7-ac6a-b228-6819-40cd0f599313",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\": \"Higor\"\n}"
+		},
+		{
+			"id": "e945e00d-e1cf-e01a-1dcb-668d9c938782",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8080/rede-social/usuario/buscar/amigo",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1591590360502,
+			"name": "BuscarAmigosDeUsuarioPorNome",
+			"description": "",
+			"collectionId": "9b1a84d7-ac6a-b228-6819-40cd0f599313",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\": \"Higor\"\n}"
+		}
+	]
+}
